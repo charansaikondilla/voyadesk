@@ -1,0 +1,6 @@
+{
+  "appId": "in.voyadesk.app",
+  "appName": "VoyaDesk",
+  "webDir": "dist",
+  "server": { "androidScheme": "https" }
+}

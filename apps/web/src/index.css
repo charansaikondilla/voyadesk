@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+
+  /* Brand: one confident blue. brand-600 matches the default company brand colour and the PWA theme colour. */
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dce8ff;
+  --color-brand-200: #bed3fe;
+  --color-brand-300: #91b3fc;
+  --color-brand-400: #5f8bf8;
+  --color-brand-500: #3a6cf2;
+  --color-brand-600: #1d5fd1;
+  --color-brand-700: #1a4cb0;
+  --color-brand-800: #1b3f8c;
+  --color-brand-900: #1c376f;
+
+  /* Ink: cool neutrals for text and icons */
+  --color-ink-300: #b4bfcd;
+  --color-ink-400: #8693a5;
+  --color-ink-500: #5d6a7c;
+  --color-ink-600: #475467;
+  --color-ink-700: #344054;
+  --color-ink-800: #1d2939;
+  --color-ink-900: #101828;
+
+  /* Surfaces */
+  --color-line: #e4e8ef;
+  --color-line-strong: #d0d6e0;
+  --color-canvas: #f4f6fa;
+  --color-navy-950: #0a1328;
+  --color-navy-900: #0f1b36;
+  --color-navy-800: #17264a;
+
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+
+  --shadow-xs: 0 1px 2px rgb(16 24 40 / 0.05);
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.06);
+  --shadow-pop: 0 12px 32px -8px rgb(16 24 40 / 0.18), 0 4px 8px -4px rgb(16 24 40 / 0.08);
+  --shadow-lift: 0 8px 20px -6px rgb(16 24 40 / 0.14);
+
+  --animate-fade-in: fade-in 160ms ease-out backwards;
+  --animate-pop-in: pop-in 180ms cubic-bezier(0.2, 0.9, 0.3, 1.2) backwards;
+  --animate-slide-up: slide-up 220ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  --animate-slide-left: slide-left 220ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-check: check-draw 420ms 120ms ease-out backwards;
+
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pop-in { from { opacity: 0; transform: translateY(4px) scale(0.98); } to { opacity: 1; transform: none; } }
+  @keyframes slide-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes slide-left { from { transform: translateX(-100%); } to { transform: none; } }
+  @keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+  @keyframes check-draw { from { stroke-dashoffset: 40; } to { stroke-dashoffset: 0; } }
+}
+
+html, body, #root { height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+  text-rendering: optimizeLegibility;
+}
+:focus-visible { outline-color: var(--color-brand-600); }
+::selection { background: var(--color-brand-100); }
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* Quiet scrollbars on desktop so dense screens don't look noisy */
+@media (pointer: fine) {
+  * { scrollbar-width: thin; scrollbar-color: var(--color-line-strong) transparent; }
+  .scroll-dark { scrollbar-color: rgb(255 255 255 / 0.14) transparent; }
+}
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Room for the phone bottom bar and the iPhone home indicator */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.mb-safe { margin-bottom: env(safe-area-inset-bottom); }
+
+select.select-chevron {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238693a5'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 1.1rem;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eceff4 25%, #f6f8fb 37%, #eceff4 63%);
+  background-size: 400% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+  .print-page { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; max-width: none !important; }
+  @page { margin: 14mm; }
+}
